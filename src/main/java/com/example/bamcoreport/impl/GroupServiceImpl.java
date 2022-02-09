@@ -16,6 +16,7 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     public GroupRepository groupRepository;
 
+
     @Override
     public List<Group> getAllGroup() {
 
@@ -47,22 +48,14 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void deleteGroup(long id) {
-
-        Group group = groupRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Group"+id));
-
-        groupRepository.delete(group);
+    public String deleteGroup(long id) {
+        groupRepository.deleteById(id);
+        return "Group removed !!";
 
     }
 
     @Override
     public Group getGroupById(long id) {
-        Optional<Group> result = groupRepository.findById(id);
-        if(result.isPresent()) {
-            return result.get();
-        }else {
-            throw new ResourceNotFoundException("Group" + id);
-        }
+      return groupRepository.findById(id).orElse(null);
     }
 }
