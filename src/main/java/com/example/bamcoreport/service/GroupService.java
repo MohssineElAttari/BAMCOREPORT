@@ -12,7 +12,7 @@ public interface GroupService {
 
     Group updateGroup(long id, Group group);
 
-    void deleteGroup(long id);
+    String deleteGroup(long id);
 
     Group getGroupById(long id);
 }
