@@ -15,7 +15,20 @@ import java.time.LocalDateTime;
 @ToString
 public class Group implements Serializable {
 
+
+
     private static final long serialVersionUID = 1L;
+
+    public Group(Long id, String name, String parentPath, String displayName, String description, User createdBy, LocalDateTime creationDate, LocalDateTime lastUpdate) {
+        this.id = id;
+        this.name = name;
+        this.parentPath = parentPath;
+        this.displayName = displayName;
+        this.description = description;
+        this.createdBy = createdBy;
+        this.creationDate = creationDate;
+        this.lastUpdate = lastUpdate;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
