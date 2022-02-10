@@ -30,6 +30,9 @@ public class Group implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
+    public Group() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
