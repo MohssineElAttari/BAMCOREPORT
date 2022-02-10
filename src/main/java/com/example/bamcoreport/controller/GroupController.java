@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,7 +33,7 @@ public class GroupController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GroupDto> getGroupById(@PathVariable(name = "id") Long id) {
-        Group group = groupService.getGroupById(id);
+        Optional<Group> group = groupService.getGroupById(id);
 
         // convert entity to DTO
         GroupDto groupResponse = modelMapper.map(group, GroupDto.class);
