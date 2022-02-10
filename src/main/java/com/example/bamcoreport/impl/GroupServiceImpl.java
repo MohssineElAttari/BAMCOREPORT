@@ -31,20 +31,20 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group updateGroup(long id, Group groupRequest) {
-        Group group = groupRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Group" + id));
-
-
+        Group group = groupRepository.findById(id).orElse(null);
         //  group.(groupRequest.);
 
-        group.setName(groupRequest.getName());
-        group.setParentPath(groupRequest.getParentPath());
-        group.setDisplayName(groupRequest.getDisplayName());
-        group.setDescription(groupRequest.getDescription());
-        group.setCreatedBy(groupRequest.getCreatedBy());
-        group.setCreationDate(groupRequest.getCreationDate());
-        group.setLastUpdate(groupRequest.getLastUpdate());
+        if(group != null){
+            group.setName(groupRequest.getName());
+            group.setParentPath(groupRequest.getParentPath());
+            group.setDisplayName(groupRequest.getDisplayName());
+            group.setDescription(groupRequest.getDescription());
+            group.setCreatedBy(groupRequest.getCreatedBy());
+            group.setCreationDate(groupRequest.getCreationDate());
+            group.setLastUpdate(groupRequest.getLastUpdate());
+        }
         return groupRepository.save(group);
+
     }
 
     @Override
@@ -55,7 +55,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getGroupById(long id) {
-      return groupRepository.findById(id).orElse(null);
+    public Optional<Group> getGroupById(long id) {
+      return groupRepository.findById(id);
     }
 }
