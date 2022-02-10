@@ -15,9 +15,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -59,8 +61,12 @@ class GroupServiceImplTest {
     @Test
     void updateGroup() {
         LocalDateTime now = LocalDateTime.now();
+        Group group = new Group();
+        group.setId(89L);
+        group.setName("Test Name");
         Group group1 = new Group(1L,"group1","group1","group1","group1",new User(),now,now);
-        when(groupService.createGroup(group1)).thenReturn(group1);
+        //given(groupRepository.findById(group.getId())).willReturn(Optional.of(group));
+        when(groupService.updateGroup(group1.getId(),group1)).thenReturn(group);
         assertNotNull(groupService.updateGroup(group1.getId(),group1));
 
     }
@@ -76,8 +82,8 @@ class GroupServiceImplTest {
     void getGroupById() {
         LocalDateTime now = LocalDateTime.now();
         Group group1 = new Group(1L,"group1","group1","group1","group1",new User(),now,now);
-        when(groupService.getGroupById(group1.getId())).thenReturn(group1,null);
-        assertNotNull(groupService.getGroupById(1L));
+        when(groupService.getGroupById(group1.getId())).thenReturn(Optional.of(group1));
+        assertNotNull(groupService.getGroupById(group1.getId()));
 
     }
 }
