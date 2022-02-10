@@ -3,6 +3,7 @@ package com.example.bamcoreport.service;
 import com.example.bamcoreport.model.entity.Group;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GroupService {
 
@@ -14,5 +15,5 @@ public interface GroupService {
 
     String deleteGroup(long id);
 
-    Group getGroupById(long id);
+    Optional<Group> getGroupById(long id);
 }
