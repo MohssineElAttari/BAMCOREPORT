@@ -3,6 +3,7 @@ package com.example.bamcoreport.impl;
 import com.example.bamcoreport.model.entity.Group;
 import com.example.bamcoreport.model.entity.User;
 import com.example.bamcoreport.repository.GroupRepository;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -32,8 +34,6 @@ class GroupServiceImplTest {
     @InjectMocks
     private GroupServiceImpl groupService;
 
-
-
     @Test
     void getAllGroup() {
         LocalDateTime now = LocalDateTime.now();
@@ -45,9 +45,11 @@ class GroupServiceImplTest {
         groups.add(group1);
         groups.add(group2);
         groups.add(group3);
-
-        Mockito.when(groupService.getAllGroup()).thenReturn(groups);
-        assertNotNull(groupService.getAllGroup());
+        doReturn(groups).when(groupRepository).findAll();
+//        Mockito.when(groupService.getAllGroup()).thenReturn(groups);
+//        assertNotNull(groupService.getAllGroup());
+        List<Group> groupList = groupService.getAllGroup();
+        assertThat(groupList).isNotEmpty();
     }
 
     @Test
