@@ -65,4 +65,28 @@ class UserServiceImplTest {
     @Test
     void getUserById() {
     }
+
+    @Test
+    void testGetAllUsers() {
+    }
+
+    @Test
+    void testCreateUser() {
+    }
+
+    @Test
+    void testUpdateUser() {
+    }
+
+    @Test
+    void testDeleteUser() {
+    }
+
+    @Test
+    void testGetUserById() {
+    }
+
+    @Test
+    void loadUserByUsername() {
+    }
 }
